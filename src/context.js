@@ -8,23 +8,53 @@ const tempURL =
   'https://opentdb.com/api.php?amount=10&category=21&difficulty=easy&type=multiple';
 
 const AppProvider = ({ children }) => {
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [questions, setQuestions] = useState([]);
-  // const [waiting, setWaiting] = useState(false)
-  // const [error, setError] = useState(false)
+  const [waiting, setWaiting] = useState(true);
+  const [error, setError] = useState(false);
+  const [correct, setCorrect] = useState(0);
+  const [index, setIndex] = useState(0);
 
   const fetchQuestions = async () => {
+    //setLoading(true);
     const response = await axios(tempURL).catch((error) => console.log(error));
     console.log(response);
-    const data = response.data.results;
-    console.log(data);
+
+    if (response) {
+      const data = response.data.results;
+      console.log(data);
+      if (data.length > 0) {
+        setQuestions(data);
+        setLoading(false);
+        setError(false);
+        setWaiting(false);
+      } else {
+        setError(true);
+        setWaiting(true);
+      }
+    } else {
+      setWaiting(true);
+    }
   };
 
   useEffect(() => {
     fetchQuestions();
   }, []);
 
-  return <AppContext.Provider value='state'>{children}</AppContext.Provider>;
+  return (
+    <AppContext.Provider
+      value={{
+        loading,
+        questions,
+        waiting,
+        error,
+        correct,
+        index,
+      }}
+    >
+      {children}
+    </AppContext.Provider>
+  );
 };
 
 const useGlobalContext = () => {
