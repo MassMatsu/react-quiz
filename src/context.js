@@ -14,9 +14,9 @@ const AppProvider = ({ children }) => {
   const [error, setError] = useState(false);
   const [correct, setCorrect] = useState(0);
   const [index, setIndex] = useState(0);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const fetchQuestions = async () => {
-    //setLoading(true);
     const response = await axios(tempURL).catch((error) => console.log(error));
     console.log(response);
 
@@ -38,25 +38,29 @@ const AppProvider = ({ children }) => {
   };
 
   const nextQuestion = () => {
-    console.log('next');
     setIndex((prev) => {
       let newIndex = prev + 1;
       if (newIndex > questions.length - 1) {
+        setIsModalOpen(true);
         newIndex = 0;
-        setCorrect(0);
       }
       return newIndex;
     });
   };
 
   const checkAnswer = (auth) => {
-    console.log('hello');
     if (auth) {
       setCorrect((prev) => {
         return prev + 1;
       });
     }
     nextQuestion();
+  };
+
+  const closeModal = () => {
+    console.log('close');
+    setIsModalOpen(false);
+    setCorrect(0);
   };
 
   useEffect(() => {
@@ -74,6 +78,8 @@ const AppProvider = ({ children }) => {
         index,
         nextQuestion,
         checkAnswer,
+        isModalOpen,
+        closeModal,
       }}
     >
       {children}

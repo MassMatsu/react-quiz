@@ -1,6 +1,7 @@
 import React from 'react';
 import { useGlobalContext } from './context';
 import Loading from './Loading';
+import Modal from './Modal';
 
 function App() {
   const {
@@ -22,6 +23,7 @@ function App() {
 
   return (
     <main>
+      <Modal />
       <section className='quiz'>
         <p className='correct-answers'>
           correct answers : {correct} / {index}
