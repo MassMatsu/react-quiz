@@ -43,9 +43,20 @@ const AppProvider = ({ children }) => {
       let newIndex = prev + 1;
       if (newIndex > questions.length - 1) {
         newIndex = 0;
+        setCorrect(0);
       }
       return newIndex;
     });
+  };
+
+  const checkAnswer = (auth) => {
+    console.log('hello');
+    if (auth) {
+      setCorrect((prev) => {
+        return prev + 1;
+      });
+    }
+    nextQuestion();
   };
 
   useEffect(() => {
@@ -62,6 +73,7 @@ const AppProvider = ({ children }) => {
         correct,
         index,
         nextQuestion,
+        checkAnswer,
       }}
     >
       {children}

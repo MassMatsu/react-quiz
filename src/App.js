@@ -9,6 +9,7 @@ function App() {
     correct,
     index,
     nextQuestion,
+    checkAnswer,
   } = useGlobalContext();
 
   if (loading) {
@@ -34,6 +35,7 @@ function App() {
                   className='answer-btn'
                   key={index}
                   dangerouslySetInnerHTML={{ __html: answer }}
+                  onClick={() => checkAnswer(answer === correct_answer)}
                 ></button>
               );
             })}
