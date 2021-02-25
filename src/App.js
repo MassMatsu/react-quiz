@@ -3,12 +3,18 @@ import { useGlobalContext } from './context';
 import Loading from './Loading';
 
 function App() {
-  const { loading, questions, correct, index } = useGlobalContext();
+  const {
+    loading,
+    questions,
+    correct,
+    index,
+    nextQuestion,
+  } = useGlobalContext();
 
   if (loading) {
     return <Loading />;
   }
-  console.log(questions);
+  //console.log(questions);
 
   const { question, correct_answer, incorrect_answers } = questions[index];
   const answers = [...incorrect_answers, correct_answer];
@@ -24,14 +30,18 @@ function App() {
           <div className='btn-container'>
             {answers.map((answer, index) => {
               return (
-                <button className='answer-btn' key={index}>
-                  {answer}
-                </button>
+                <button
+                  className='answer-btn'
+                  key={index}
+                  dangerouslySetInnerHTML={{ __html: answer }}
+                ></button>
               );
             })}
           </div>
         </article>
-        <button className='next-question'>next question</button>
+        <button className='next-question' onClick={nextQuestion}>
+          next question
+        </button>
       </section>
     </main>
   );

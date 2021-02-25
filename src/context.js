@@ -37,6 +37,17 @@ const AppProvider = ({ children }) => {
     }
   };
 
+  const nextQuestion = () => {
+    console.log('next');
+    setIndex((prev) => {
+      let newIndex = prev + 1;
+      if (newIndex > questions.length - 1) {
+        newIndex = 0;
+      }
+      return newIndex;
+    });
+  };
+
   useEffect(() => {
     fetchQuestions();
   }, []);
@@ -50,6 +61,7 @@ const AppProvider = ({ children }) => {
         error,
         correct,
         index,
+        nextQuestion,
       }}
     >
       {children}
