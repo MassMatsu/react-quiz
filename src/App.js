@@ -2,6 +2,7 @@ import React from 'react';
 import { useGlobalContext } from './context';
 import Loading from './Loading';
 import Modal from './Modal';
+import SetupForm from './SetupForm';
 
 function App() {
   const {
@@ -11,7 +12,12 @@ function App() {
     index,
     nextQuestion,
     checkAnswer,
+    waiting,
   } = useGlobalContext();
+
+  if (waiting) {
+    return <SetupForm />;
+  }
 
   if (loading) {
     return <Loading />;

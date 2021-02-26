@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useEffect } from 'react';
 const AppContext = createContext();
 
-//const API_ENDPOINT = 'https://opentdb.com/api.php?';
+const API_ENDPOINT = 'https://opentdb.com/api.php?';
 const tempURL =
   'https://opentdb.com/api.php?amount=10&category=21&difficulty=easy&type=multiple';
 
@@ -15,9 +15,21 @@ const AppProvider = ({ children }) => {
   const [correct, setCorrect] = useState(0);
   const [index, setIndex] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [quiz, setQuiz] = useState({
+    amount: 10,
+    category: 'sports',
+    difficulty: 'easy',
+  });
 
-  const fetchQuestions = async () => {
-    const response = await axios(tempURL).catch((error) => console.log(error));
+  const table = {
+    sports: 21,
+    history: 23,
+    politics: 24,
+    jpAnime: 31,
+  };
+
+  const fetchQuestions = async (url) => {
+    const response = await axios(url).catch((error) => console.log(error));
     console.log(response);
 
     if (response) {
@@ -58,14 +70,32 @@ const AppProvider = ({ children }) => {
   };
 
   const closeModal = () => {
-    console.log('close');
     setIsModalOpen(false);
+    setWaiting(true);
     setCorrect(0);
   };
 
-  useEffect(() => {
-    fetchQuestions();
-  }, []);
+  const handleChange = (e) => {
+    console.log(e.target.value);
+    console.log(e.target.name);
+
+    setQuiz({ ...quiz, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    //console.log(e.target.amount.value);
+    const url = `${API_ENDPOINT}amount=${quiz.amount}&category=${
+      table[quiz.category]
+    }&difficulty=${quiz.difficulty}&type=multiple`;
+    //'https://opentdb.com/api.php?amount=10&category=21&difficulty=easy&type=multiple';
+    fetchQuestions(url);
+    console.log(url);
+  };
+
+  // useEffect(() => {
+  //   fetchQuestions();
+  // }, []);
 
   return (
     <AppContext.Provider
@@ -80,6 +110,9 @@ const AppProvider = ({ children }) => {
         checkAnswer,
         isModalOpen,
         closeModal,
+        handleChange,
+        handleSubmit,
+        quiz,
       }}
     >
       {children}
