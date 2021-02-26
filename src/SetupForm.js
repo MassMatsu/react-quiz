@@ -6,7 +6,7 @@ const SetupForm = () => {
   return (
     <section className='quiz quiz-small'>
       <form className='setup-form' onSubmit={handleSubmit}>
-        <h2>quiz challenge</h2>
+        <h2 className='title'>quiz challenge</h2>
         <div className='form-control'>
           <label htmlFor='amount'> number of quwstions</label>
           <input

@@ -22,7 +22,6 @@ function App() {
   if (loading) {
     return <Loading />;
   }
-  //console.log(questions);
 
   const { question, correct_answer, incorrect_answers } = questions[index];
   let answers = [...incorrect_answers];
