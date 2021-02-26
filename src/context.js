@@ -4,8 +4,6 @@ import axios from 'axios';
 const AppContext = createContext();
 
 const API_ENDPOINT = 'https://opentdb.com/api.php?';
-const tempURL =
-  'https://opentdb.com/api.php?amount=10&category=21&difficulty=easy&type=multiple';
 
 const AppProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);

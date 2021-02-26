@@ -8,7 +8,7 @@ const SetupForm = () => {
       <form className='setup-form' onSubmit={handleSubmit}>
         <h2 className='title'>quiz challenge</h2>
         <div className='form-control'>
-          <label htmlFor='amount'> number of quwstions</label>
+          <label htmlFor='amount'> number of questions</label>
           <input
             type='number'
             id='amount'
