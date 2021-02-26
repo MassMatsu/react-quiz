@@ -25,7 +25,15 @@ function App() {
   //console.log(questions);
 
   const { question, correct_answer, incorrect_answers } = questions[index];
-  const answers = [...incorrect_answers, correct_answer];
+  let answers = [...incorrect_answers];
+  const randomIndex = Math.floor(Math.random() * 4);
+  console.log(randomIndex);
+  if (randomIndex === 3) {
+    answers.push(correct_answer);
+  } else {
+    answers.push(answers[randomIndex]); // duplicate random element - answers[randomIndex] added in the end of the array
+    answers[randomIndex] = correct_answer; // change original answers[randomIndex] to correct_answer
+  }
 
   return (
     <main>

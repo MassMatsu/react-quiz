@@ -1,6 +1,6 @@
 import React, { useContext, createContext, useState } from 'react';
 import axios from 'axios';
-import { useEffect } from 'react';
+
 const AppContext = createContext();
 
 const API_ENDPOINT = 'https://opentdb.com/api.php?';
@@ -76,9 +76,6 @@ const AppProvider = ({ children }) => {
   };
 
   const handleChange = (e) => {
-    console.log(e.target.value);
-    console.log(e.target.name);
-
     setQuiz({ ...quiz, [e.target.name]: e.target.value });
   };
 
@@ -88,14 +85,9 @@ const AppProvider = ({ children }) => {
     const url = `${API_ENDPOINT}amount=${quiz.amount}&category=${
       table[quiz.category]
     }&difficulty=${quiz.difficulty}&type=multiple`;
-    //'https://opentdb.com/api.php?amount=10&category=21&difficulty=easy&type=multiple';
-    fetchQuestions(url);
-    console.log(url);
-  };
 
-  // useEffect(() => {
-  //   fetchQuestions();
-  // }, []);
+    fetchQuestions(url);
+  };
 
   return (
     <AppContext.Provider
