@@ -16,7 +16,11 @@ function App() {
   } = useGlobalContext();
 
   if (waiting) {
-    return <SetupForm />;
+    return (
+      <main>
+        <SetupForm />
+      </main>
+    );
   }
 
   if (loading) {

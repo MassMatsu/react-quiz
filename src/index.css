@@ -150,8 +150,9 @@ main {
 .quiz {
   width: 90vw;
   max-width: var(--max-width);
-  margin: 4rem auto;
+  /* margin: 4rem auto; */
   background: var(--clr-white);
+  opacity: .8;
   /* background: url('/images/world.jpg') no-repeat center/cover; */
   border-radius: var(--radius);
   padding: 3rem;
