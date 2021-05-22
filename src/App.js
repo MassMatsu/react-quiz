@@ -41,7 +41,7 @@ function App() {
   return (
     <main>
       <Modal />
-      <section className='quiz'>
+      <section className='quiz section'>
         <p className='correct-answers'>
           correct answers : {correct} / {index}
         </p>
