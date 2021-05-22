@@ -1,5 +1,5 @@
 ##### react-quiz-challenge
-a simple quize app where you can challenge a number of questions in various categories.
+a simple quiz app where you can challenge a number of questions in various categories.
 
 let's play! - https://react-quiz-challenge.netlify.app
 
